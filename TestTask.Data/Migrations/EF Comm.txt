@@ -1,0 +1,11 @@
+﻿
+
+Add-Migration InitialCreate -StartUpProjectName "TestTask.UW" -ProjectName "TestTask.Data"
+
+Add-Migration DatabaseMigration -StartUpProjectName TestTask.UW -ProjectName "TestTask.Data"
+
+Update-Database  -StartUpProjectName TestTask.UW -ProjectName "TestTask.Data"
+
+
+
+Enable-Migrations -EnableAutomaticMigrations -Force

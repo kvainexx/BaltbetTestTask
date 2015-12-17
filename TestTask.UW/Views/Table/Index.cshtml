@@ -1,0 +1,33 @@
+﻿@model TestTask.UW.Models.Records.RecordsModel
+
+
+<table class="table-striped table-bordered table">
+    <tr>
+        <th class="col-md-1"></th>
+        <th class="col-md-4">Имя</th>
+        <th class="col-md-4">Описание</th>
+        <th class="col-md-3">Значение</th>
+    </tr>
+    
+    @foreach (var record in Model.Records)
+    {
+        <tr>
+            <td align="center">
+                <a href="@Url.Action("UnFave", new RouteValueDictionary {
+                                                {"Paging.PerPage", Model.Paging.PerPage },
+                                                {"Paging.Current", Model.Paging.Current },
+                                                {"Id", record.Id } })">
+                    <i class="glyphicon-star@(record.IsFavorite ? "" : "-empty") glyphicon"></i>
+                </a>
+            </td>
+            <td>@record.Name</td>
+            <td>@record.Description</td>
+            <td>@record.Value</td>
+        </tr>
+    }
+</table>
+
+@Html.DisplayFor(model => model.Paging)
+
+
+

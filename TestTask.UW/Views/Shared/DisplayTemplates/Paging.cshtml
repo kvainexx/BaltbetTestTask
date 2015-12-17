@@ -1,0 +1,38 @@
+﻿@model TestTask.UW.Models.Paging
+
+<div class="paginator">
+    <div>
+        Найдено записей: <span>@Model.Total.Items</span>
+    </div>
+    <div>
+        <span class="pages-text">Страница: <span>@Model.Current</span> из <span>@Model.Total.Pages</span></span>
+    </div>
+
+    @if (Model.Total.Items > 0)
+    {
+        var offset = 3;
+
+        <ul class="pagination">
+
+            <li class="@((Model.Current > 1) ? "" : "disabled")">
+                <a href="?paging.current=@(Model.Current - 1)&paging.perpage=@(Model.PerPage)">&laquo;</a>
+            </li>
+
+            @for (int page = Model.Current - offset; page <= Model.Current + offset; page++)
+            {
+                if (page < 1 || page > Model.Total.Pages) { continue; }
+
+                <li class="@((Model.Current == page) ? "active" : "")">
+                    <a href="?paging.current=@(page)&paging.perpage=@(Model.PerPage)">@page</a>
+                </li>
+            }
+
+            <li class="@((Model.Current < Model.Total.Pages) ? "" : "disabled")">
+                <a href="?paging.current=@(Model.Current + 1)&paging.perpage=@(Model.PerPage)">&raquo;</a>
+            </li>
+
+        </ul>
+    }
+
+</div>
+

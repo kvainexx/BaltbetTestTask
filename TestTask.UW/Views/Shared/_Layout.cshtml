@@ -1,0 +1,38 @@
+﻿@using TestTask.UW.Helpers
+@{
+    var totalFavorites = ViewBag.TotalFavorites as int?;
+    var favoritesEnabled = (totalFavorites.HasValue && totalFavorites.Value > 0);
+    var favoritesTabName = String.Format("Избранное ({0})", totalFavorites);
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестовое задание</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar  navbar-static-top">
+        <div class="container">
+            <div class="navbar-collapse collapse">
+                <ul class="nav nav-tabs">
+                    <li class="@Html.ActiveTab("Index", "Table")">@Html.ActionLink("Таблица", "Index", "Table")</li>
+                    <li class="@Html.ActiveTab("Index", "Tree")">@Html.ActionLink("Дерево", "Index", "Tree")</li>
+                    <li class="@Html.ActiveTab("Index", "Favorites") @(favoritesEnabled ? "" : "disabled")">@Html.ActionLink(favoritesTabName, "Index", "Favorites", favoritesEnabled)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()    
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

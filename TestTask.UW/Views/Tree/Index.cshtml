@@ -1,0 +1,36 @@
+﻿@model TestTask.UW.Models.Directories.DirectoriesModel
+
+<div class="panel-group">
+
+    @foreach (var directory in Model.Directories)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <a data-toggle="collapse" href="#@directory.Id">
+                        <div class="row">
+                            <span class="col-md-1 col-sm-1 glyphicon-folder-open glyphicon"></span>
+                            <span class="col-md-11 col-sm-11">@directory.Name</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div id="@directory.Id" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    @foreach (var record in directory.Records)
+                    {
+                        <div class="row">
+                            <a href="@Url.Action("UnFave", new { id = record.Id })">
+                                <i class="col-md-2 col-sm-2 glyphicon-star@(record.IsFavorite ? "" : "-empty") glyphicon"></i>
+                            </a>
+                            <span class="col-md-10 col-sm-10">@record.Name</span>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+</div>
